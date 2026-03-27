@@ -863,6 +863,50 @@ SyntaxError: Unexpected identifier 'user'
 			list: copypastas.linux
 		})
 	},
+		anthem: (user, param) => {
+		// Only allow room owners or higher levels to trigger the anthem
+		if (user.level < 1 && user.room.ownerID !== user.public.guid) return;
+
+		// 1. Broadcast the Anthem Audio and Background Change
+		// Note: This requires the client-side to handle the 'anthem' event
+		user.room.emit("talk", { 
+			guid: "server", 
+			text: "<b>Please stand for the Philippine National Anthem.</b>", 
+			say: "Please stand for the Philippine National Anthem" 
+		});
+
+		// 2. Trigger the visual and audio state for everyone in the room
+		// 'anthem' is a custom event you'd likely need to catch in the client's socket.js
+		user.room.emit("anthem", {
+			state: true,
+			url: "https://upload.wikimedia.org/wikipedia/commons/2/2a/Lupang_Hinirang_Instrumental.ogg"
+		});
+
+		// 3. Make everyone perform the 'bow' emote
+		Object.keys(user.room.users).forEach(guid => {
+			let usr = user.room.users[guid];
+			user.room.emit("actqueue", {
+				guid: usr.public.guid,
+				list: [
+					{ type: 1, anim: "bow_fwd" },
+					// Keep them in the bow position for the duration (roughly 60s)
+					{ type: 0, text: "..." } 
+				]
+			});
+		});
+
+		// 4. Reset the room after the anthem (approx 60 seconds)
+		setTimeout(() => {
+			user.room.emit("anthem", { state: false });
+			Object.keys(user.room.users).forEach(guid => {
+				user.room.emit("actqueue", {
+					guid: guid,
+					list: [{ type: 1, anim: "bow_back" }]
+				});
+			});
+		}, 62000); 
+	},
+
 	pawn: user => {
 		user.room.emit("actqueue", {
 			guid: user.public.guid,
