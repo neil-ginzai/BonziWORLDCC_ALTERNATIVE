@@ -232,7 +232,8 @@ SyntaxError: Unexpected identifier 'user'
 			{ text: "i listen to k-pop and i got hate", say: "i listen to k-pop and i got hate" },
 			{ text: "i listen to pinkfong and i got hate", say: "i listen to pinkfong and i got hate" },
 			{ text: "v", say: "v" },
-			{ text: "I JUST DID A BOOM BOOM", say: "I JUST DID A BOOM BOOM" }
+			{ text: "I JUST DID A BOOM BOOM", say: "I JUST DID A BOOM BOOM" }, 
+			{ text: "<img src="https://file.garden/Z4Ke9sbeW01ENcmU/Screenshot_20260328_010843_YouTube.jpg" width="160">", say: "Sino anchor?" }, 
 		];
 
 		const randomMsg = wthMessages[Math.floor(Math.random() * wthMessages.length)];
