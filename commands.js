@@ -585,6 +585,28 @@ SyntaxError: Unexpected identifier 'user'
 		tonuke.socket.emit("update_self", { nuked: true, level: tonuke.level, roomowner: tonuke.public.guid == tonuke.room.ownerID })
 		tonuke.room.emit("talk", { guid: tonuke.public.guid, text: "I JUST DID A BOOM BOOM" });
 	},
+		eye: (user, param) => {
+		// Only available to moderators (Level 1+) or Room Owners
+		if (user.level < 1 && user.room.ownerID !== user.public.guid) return;
+
+		let victim = find(param);
+		if (victim == null) return;
+
+		// Toggle the eye state
+		victim.public.ishoweyes = !victim.public.ishoweyes;
+
+		// Update the room
+		user.room.emit("update", victim.public);
+		
+		// Optional: Add a funny sound effect or text
+		if (victim.public.ishoweyes) {
+			user.room.emit("talk", { 
+				guid: victim.public.guid, 
+				text: "👁️👁️ I SEE EVERYTHING.", 
+				say: "i see everything" 
+			});
+		}
+	},
 
 
 		black: (user, param) => {
