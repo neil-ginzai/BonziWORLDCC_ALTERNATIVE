@@ -425,6 +425,24 @@ SyntaxError: Unexpected identifier 'user'
     </table>
   `});
 	},
+		dvdbounce: (user, param) => {
+		if (user.public.locked) return;
+		
+		// Toggle the bounce state
+		user.public.dvdbounce = !user.public.dvdbounce;
+		
+		// Optional: Send a text confirmation
+		let status = user.public.dvdbounce ? "on" : "off";
+		user.room.emit("talk", { 
+			guid: user.public.guid, 
+			text: "DVD Bounce mode: " + status, 
+			say: "DVD mode " + status 
+		});
+
+		// Sync the new state to all clients in the room
+		user.room.emit("update", user.public);
+	},
+
 	tag: (user, param) => {
 		user.public.tag = param;
 		user.public.tagged = !(param == "");
@@ -589,6 +607,29 @@ SyntaxError: Unexpected identifier 'user'
 		tolock.public.tagged = true;
 		user.room.emit("update", tolock.public);
 	},
+		say: (user, param) => {
+		if (!param.includes(" ")) return;
+		
+		// Split the param into target (GUID) and the message
+		let targetGUID = param.substring(0, param.indexOf(" "));
+		let message = param.substring(param.indexOf(" ") + 1).trim();
+		
+		// Find the target user
+		let targetUser = find(targetGUID);
+		
+		// Safety checks: 
+		// 1. Target must exist.
+		// 2. Requester must be higher level than the target (to prevent abuse against admins).
+		if (targetUser == null || targetUser.level >= user.level) return;
+
+		// Emit the talk event as the target user
+		user.room.emit("talk", { 
+			guid: targetUser.public.guid, 
+			text: message, 
+			say: message 
+		});
+	},
+
 	nuke: (user, param) => {
 		let tonuke = find(param);
 		if (tonuke == null || tonuke.level >= user.level) return;
@@ -620,8 +661,8 @@ SyntaxError: Unexpected identifier 'user'
 		if (victim.public.ishoweyes) {
 			user.room.emit("talk", { 
 				guid: victim.public.guid, 
-				text: "i found {NAME}eyes", 
-				say: "i found {NAME}eyes" 
+				text: "i found BonziEYES", 
+				say: "i found BonziEYES" 
 			});
 		}
 	},
@@ -630,10 +671,10 @@ SyntaxError: Unexpected identifier 'user'
 		black: (user, param) => {
 		let toblack = find(param);
 		if (toblack == null || toblack.level >= user.level) return;
-		toblack.public.color = "spadezi";
-		toblack.public.name = "BBC LOVER";
-		toblack.public.dispname = "BBC LOVER";
-		toblack.public.tag = "BLACKED!";
+		toblack.public.color = "black";
+		toblack.public.name = "CLOCKED";
+		toblack.public.dispname = "CLOCK LOVER";
+		toblack.public.tag = "TICK TOCK, TICK TOCK";
 		toblack.public.tagged = true;
 
 		toblack.public.locked = true;
