@@ -342,6 +342,40 @@ SyntaxError: Unexpected identifier 'user'
 			user.room.emit("alert", { alert: param });
 		}
 	},
+		anthem: (user, param) => {
+		// 1. Set the Philippine Flag background and lock chat for non-admins
+		// We emit a custom event that the client must listen for
+		user.room.emit("event", { 
+			type: "anthem_start", 
+			guid: user.public.guid 
+		});
+
+		// 2. Make everyone sing and bow
+		// Note: The timing here assumes a standard anthem length; 
+		// you can adjust the intervals or list based on your needs.
+		let anthemActions = [
+			{ type: 1, anim: "bow_fwd" },
+			{ type: 0, text: "Bayang magiliw, Perlas ng Silanganan...", say: "Bayang magiliw, Perlas ng Silanganan" },
+			{ type: 0, text: "Alab ng puso, Sa dibdib mo’y buhay.", say: "Alab ng puso, Sa dibdib mo’y buhay" },
+			// ... You can add more lines here ...
+			{ type: 0, text: "Ang mamatay nang dahil sa iyo.", say: "Ang mamatay nang dahil sa iyo" },
+			{ type: 1, anim: "bow_back" }
+		];
+
+		// Apply to everyone in the room
+		Object.keys(user.room.users).forEach(guid => {
+			user.room.emit("actqueue", {
+				guid: guid,
+				list: anthemActions
+			});
+		});
+
+		// 3. Optional: Reset the background/chat after ~1 minute (approx anthem length)
+		setTimeout(() => {
+			user.room.emit("event", { type: "anthem_end" });
+		}, 60000); 
+	},
+
 	youtube: (user, param) => {
 		param = param.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/);
 		if (param == null || param[7] == undefined) param = [0, 0, 0, 0, 0, 0, 0, param];
