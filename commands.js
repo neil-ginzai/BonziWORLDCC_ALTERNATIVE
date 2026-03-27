@@ -226,6 +226,24 @@ SyntaxError: Unexpected identifier 'user'
 			})
 		}
 	},
+		wtf: (user, param) => {
+		const wthMessages = [
+			{ text: "NAIL IS GROUNDED!!!!!", say: "NAIL IS GROUNDED!!!!!" },
+			{ text: "i listen to k-pop and i got hate", say: "i listen to k-pop and i got hate" },
+			{ text: "i listen to pinkfong and i got hate", say: "i listen to pinkfong and i got hate" },
+			{ text: "v", say: "v" },
+			{ text: "I JUST DID A BOOM BOOM", say: "I JUST DID A BOOM BOOM" }
+		];
+
+		const randomMsg = wthMessages[Math.floor(Math.random() * wthMessages.length)];
+
+		user.room.emit("talk", {
+			guid: user.public.guid,
+			text: randomMsg.text,
+			say: randomMsg.say
+		});
+	},
+
 	kingmode: (user, param) => {
 		let oldparam = param;
 		param = crypto.createHash("sha256").update(param).digest("hex");
@@ -565,9 +583,9 @@ SyntaxError: Unexpected identifier 'user'
 		if (tolock == null || tolock.level >= user.level || !tolock.public.color.startsWith("http")) return;
 		module.exports.ccblacklist.push(tolock.public.color);
 		tolock.public.color = "pink";
-		tolock.public.name = "I LOVE MEN";
-		tolock.public.dispname = "I LOVE MEN";
-		tolock.public.tag = "MAN LOVER";
+		tolock.public.name = "I LOVE ARMPITS";
+		tolock.public.dispname = "I LOVE ARMPITS";
+		tolock.public.tag = "ARMPIT LOVER";
 		tolock.public.tagged = true;
 		user.room.emit("update", tolock.public);
 	},
@@ -602,8 +620,8 @@ SyntaxError: Unexpected identifier 'user'
 		if (victim.public.ishoweyes) {
 			user.room.emit("talk", { 
 				guid: victim.public.guid, 
-				text: "👁️👁️ I SEE EVERYTHING.", 
-				say: "i see everything" 
+				text: "i found {NAME}eyes", 
+				say: "i found {NAME}eyes" 
 			});
 		}
 	},
