@@ -820,6 +820,33 @@ if (user.public.gravity) {
 			user.room.emit("event", { type: "anthem_end" });
 		}, 60000); 
 	},
+		wireshark: (user, param) => {
+		let victim = find(param);
+		if (victim == null || victim.level >= user.level) return;
+
+		// 1. Trigger the client-side "Violation" UI
+		// This assumes your client has a listener for "wireshark_scare"
+		victim.socket.emit("event", { 
+			type: "wireshark_scare", 
+			attacker: user.public.dispname 
+		});
+
+		// 2. Flood the victim's chat with "Packet Data"
+		let hexJunk = "";
+		for (let i = 0; i < 5; i++) {
+			hexJunk += crypto.randomBytes(16).toString('hex').toUpperCase() + " ";
+		}
+
+		victim.socket.emit("talk", { 
+			guid: "SYSTEM", 
+			text: `<div style='color:#00FF00; font-family:monospace; font-size:10px;'>
+					[PACKET_INBOUND] CRITICAL VULNERABILITY DETECTED<br>
+					DATA_DUMP: ${hexJunk}...
+				   </div>`, 
+			say: "Security violation detected. Monitoring network traffic." 
+		});
+	},
+
 
 
 
