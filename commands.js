@@ -180,6 +180,68 @@ SyntaxError: Unexpected identifier 'user'
 			list: joke
 		})
 	},
+		botmaker: (user, param) => {
+		if (user.level < 1 && user.room.ownerID !== user.public.guid) return;
+
+		// If no parameters, send the GUI window to the user
+		if (!param) {
+			user.socket.emit("window", {
+				title: "Advanced Bot Maker",
+				html: `
+					<div id="botgui" style="font-family:sans-serif;">
+						<p><b>Name:</b> <input type="text" id="b_name" value="Botty"></p>
+						<p><b>Color/URL:</b> <input type="text" id="b_color" value="purple"></p>
+						<p><b>Webpage URL:</b> <input type="text" id="b_url" placeholder="https://example.com"></p>
+						<p><b>Behavior:</b> 
+							<select id="b_type">
+								<option value="read">Read Random Line</option>
+								<option value="asshole">Asshole Random Fact</option>
+							</select>
+						</p>
+						<button onclick="let val = document.getElementById('b_name').value + ' ' + document.getElementById('b_color').value + ' ' + document.getElementById('b_type').value + ' ' + document.getElementById('b_url').value; socket.emit('command', {list: ['botmaker', val]})">Spawn Bot</button>
+					</div>
+				`
+			});
+			return;
+		}
+
+		// Logic for processing the bot spawn
+		let [name, color, type, url] = param.split(" ");
+		let botGuid = "bot_" + Math.random().toString(36).substring(7);
+
+		// Helper to fetch and "Asshole-ify" content
+		const processWebpage = async (targetUrl) => {
+			try {
+				const axios = require('axios'); // Ensure you have 'axios' installed: npm install axios
+				const response = await axios.get(targetUrl);
+				const text = response.data.replace(/<[^>]*>?/gm, ' '); // Strip HTML tags
+				const lines = text.split(/[.!?]/).filter(l => l.trim().length > 10);
+				let randomLine = lines[Math.floor(Math.random() * lines.length)].trim().substring(0, 150);
+
+				let botPublic = { guid: botGuid, name: name, color: color, tag: "WEB-BOT", tagged: true };
+				user.room.emit("join", botPublic);
+
+				let list = [];
+				if (type === "asshole") {
+					list = [
+						{ type: 0, text: `Hey, ${randomLine}!` },
+						{ type: 0, text: "You're a fucking asshole!" },
+						{ type: 1, anim: "grin_fwd" }
+					];
+				} else {
+					list = [{ type: 0, text: `I read this: ${randomLine}` }];
+				}
+
+				user.room.emit("actqueue", { guid: botGuid, list: list });
+				setTimeout(() => user.room.emit("leave", botGuid), 15000);
+			} catch (e) {
+				user.socket.emit("talk", { guid: "sys", text: "Error fetching webpage." });
+			}
+		};
+
+		processWebpage(url);
+	},
+
 	fact: (user, param) => {
 		let fact = [{ "type": 0, "text": "Hey kids, it's time for a Fun Fact®!", "say": "Hey kids, it's time for a Fun Fact!" }];
 		facts[Math.floor(Math.random() * facts.length)].forEach(item => {
