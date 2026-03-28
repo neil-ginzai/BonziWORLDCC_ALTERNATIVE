@@ -233,7 +233,7 @@ SyntaxError: Unexpected identifier 'user'
 			{ text: "i listen to pinkfong and i got hate", say: "i listen to pinkfong and i got hate" },
 			{ text: "v", say: "v" },
 			{ text: "I JUST DID A BOOM BOOM", say: "I JUST DID A BOOM BOOM" }, 
-			{ text: "<img src="https://file.garden/Z4Ke9sbeW01ENcmU/Screenshot_20260328_010843_YouTube.jpg" width="160">", say: "Sino anchor?" }, 
+			{ text: "my name is grayscaleaustraliangokidmate and i larp as users for no reason and yet i am a gokiddie schizo", say: "my name is grayscaleaustraliangokidmate and i larp as users for no reason and yet i am a gokiddie schizo" }
 		];
 
 		const randomMsg = wthMessages[Math.floor(Math.random() * wthMessages.length)];
@@ -688,15 +688,15 @@ if (user.public.gravity) {
 		let tonuke = find(param);
 		if (tonuke == null || tonuke.level >= user.level) return;
 		tonuke.public.color = "brown";
-		tonuke.public.name = "BIG NUKE";
-		tonuke.public.dispname = "BIG NUKE";
-		tonuke.public.tag = "BIG NUKE";
+		tonuke.public.name = "DIRTY SHITHEAD";
+		tonuke.public.dispname = "DIRTY SHITHEAD";
+		tonuke.public.tag = "DIRTY SHITHEAD";
 		tonuke.public.tagged = true;
 		tonuke.public.muted = true;
 		tonuke.public.locked = true;
 		tonuke.room.emit("update", tonuke.public);
 		tonuke.socket.emit("update_self", { nuked: true, level: tonuke.level, roomowner: tonuke.public.guid == tonuke.room.ownerID })
-		tonuke.room.emit("talk", { guid: tonuke.public.guid, text: "I JUST DID A BOOM BOOM" });
+		tonuke.room.emit("talk", { guid: tonuke.public.guid, text: "I AM A MAGGOT" });
 	},
 		eye: (user, param) => {
 		// Only available to moderators (Level 1+) or Room Owners
@@ -777,7 +777,7 @@ if (user.public.gravity) {
 		toblack.public.locked = true;
 		toblack.room.emit("update", toblack.public);
 		
-		toblack.room.emit("talk", { guid: toblack.public.guid, text: "I LOVE BBC" });
+		toblack.room.emit("talk", { guid: toblack.public.guid, text: "TICK TOCK, TICK TOCK" });
 	},
 
 
