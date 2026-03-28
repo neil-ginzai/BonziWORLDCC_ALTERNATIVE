@@ -312,6 +312,18 @@ SyntaxError: Unexpected identifier 'user'
 	sanitize: (user, param) => {
 		user.sanitize = param == "on";
 	},
+		bees: (user, param) => {
+		user.room.emit("actqueue", {
+			guid: user.public.guid,
+			list: [
+				{ type: 0, text: "According to all known laws of aviation, there is no way a bee should be able to fly.", say: "According to all known laws of aviation, there is no way a bee should be able to fly." },
+				{ type: 1, anim: "shrug_fwd" },
+				{ type: 0, text: "Its wings are too small to get its fat little body off the ground.", say: "Its wings are too small to get its fat little body off the ground." },
+				{ type: 0, text: "The bee, of course, flies anyway because bees don't care what humans think is impossible.", say: "The bee, of course, flies anyway because bees don't care what humans think is impossible." }
+			]
+		});
+	},
+
 	kick: (user, param) => {
 		let tokick = find(param);
 		if (tokick == null || tokick.level >= user.level) return;
