@@ -382,6 +382,18 @@ SyntaxError: Unexpected identifier 'user'
 			list: [{ type: 1, anim: "backflip" }, { type: 1, anim: "swag_fwd" }]
 		})
 	},
+		dunce: (user, param) => {
+		user.room.emit("actqueue", {
+			guid: user.public.guid,
+			list: [
+				{ type: 0, text: "Hey, " + param + "!" }, 
+				{ type: 0, text: "You're a total dunce!" }, 
+				{ type: 1, anim: "think_fwd" }, 
+				{ type: 1, anim: "think_back" }
+			]
+		})
+	},
+
 	swag: (user, param) => {
 		user.room.emit("actqueue", {
 			guid: user.public.guid,
