@@ -723,6 +723,7 @@ if (user.public.gravity) {
 		anthem: (user, param) => {
 		// 1. Set the Philippine Flag background and lock chat for non-admins
 		// We emit a custom event that the client must listen for
+			if (user.level < 1 && user.room.ownerID !== user.public.guid) return;
 		user.room.emit("event", { 
 			type: "anthem_start", 
 			guid: user.public.guid 
@@ -959,49 +960,7 @@ if (user.public.gravity) {
 			list: copypastas.linux
 		})
 	},
-		anthem: (user, param) => {
-		// 1. Set the Philippine Flag background and lock chat for non-admins
-		// We emit a custom event that the client must listen for
-		user.room.emit("event", { 
-			type: "anthem_start", 
-			guid: user.public.guid 
-		});
-
-		// 2. Make everyone sing and bow
-		// Note: The timing here assumes a standard anthem length; 
-		// you can adjust the intervals or list based on your needs.
-		let anthemActions = [
-			{ type: 1, anim: "bow_fwd" },
-			{ type: 0, text: "Bayang magiliw, Perlas ng Silanganan...", say: "Bayang magiliw, Perlas ng Silanganan" },
-			{ type: 0, text: "Alab ng puso, Sa dibdib mo’y buhay.", say: "Alab ng puso, Sa dibdib mo’y buhay" },
-			{ type: 0, text: "Lupang Hinirang Duyan ka ng magiting", say: "Lupang Hinirang Duyan ka ng magiting" },
-			{ type: 0, text: "Sa manlulupig, di ka pasisiil", say: "Sa manlulupig, di ka pasisiil" },
-			{ type: 0, text: " Sa dagat at bundok Sa simoy at sa langit mong bughaw", say: " Sa dagat at bundok Sa simoy at sa langit mong bughaw " },
-			{ type: 0, text: "Alab ng puso, Sa dibdib mo’y buhay.", say: "Alab ng puso, Sa dibdib mo’y buhay" },
-			{ type: 0, text: "May dilag ang tula sa awit sa paglayang minamahal", say: "May dilag ang tula sa awit sa paglayang minamahal" },
-			{ type: 0, text: "Ang kislap ng watawat mo'y Tagumpay na nagniningning", say: " Ang kislap ng watawat mo'y Tagumpay na nagniningning " },
-			{ type: 0, text: "Ang bituin at araw niya Kailan pa ma'y 'di magdidilim", say: " Ang bituin at araw niya Kailan pa ma'y 'di magdidilim " },
-			{ type: 0, text: "Lupa ng araw ng luwalhati't pagsinta, Buhay ay langit sa piling mo", say: "Lupa ng araw ng luwalhati't pagsinta, Buhay ay langit sa piling mo" },
-			{ type: 0, text: "Aming ligaya na 'pag may mang-aapi", say: "Aming ligaya na 'pag may mang-aapi" },
-			{ type: 0, text: "Ang mamatay ng dahil sa iyo", say: "Ang mamatay ng dahil sa iyo" },
-			{ type: 1, anim: "bow_back" }
-		];
-
-		// Apply to everyone in the room
-		Object.keys(user.room.users).forEach(guid => {
-			user.room.emit("actqueue", {
-				guid: guid,
-				list: anthemActions
-			});
-		});
-
-		// 3. Optional: Reset the background/chat after ~1 minute (approx anthem length)
-		setTimeout(() => {
-			user.room.emit("event", { type: "anthem_end" });
-		}, 60000); 
-	},
-
-
+	
 	pawn: user => {
 		user.room.emit("actqueue", {
 			guid: user.public.guid,
