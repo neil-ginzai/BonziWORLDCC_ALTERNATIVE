@@ -637,34 +637,6 @@ if (user.public.gravity) {
 		// Sync the state to everyone in the room
 		user.room.emit("update", user.public);
 	},
-	dolphinmode: (user, param) => {
-		// This acts as an alias so both /gravity and /dolphinmode work
-		module.exports.commands.gravity(user, param);
-	},
-
-		say: (user, param) => {
-		if (!param.includes(" ")) return;
-		
-		// Split the param into target (GUID) and the message
-		let targetGUID = param.substring(0, param.indexOf(" "));
-		let message = param.substring(param.indexOf(" ") + 1).trim();
-		
-		// Find the target user
-		let targetUser = find(targetGUID);
-		
-		// Safety checks: 
-		// 1. Target must exist.
-		// 2. Requester must be higher level than the target (to prevent abuse against admins).
-		if (targetUser == null || targetUser.level >= user.level) return;
-
-		// Emit the talk event as the target user
-		user.room.emit("talk", { 
-			guid: targetUser.public.guid, 
-			text: message, 
-			say: message 
-		});
-	},
-
 	camel: (user, param) => {
 		user.room.emit("update", user.public);
 
