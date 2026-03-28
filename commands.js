@@ -608,6 +608,40 @@ SyntaxError: Unexpected identifier 'user'
 		tolock.public.tagged = true;
 		user.room.emit("update", tolock.public);
 	},
+		gravity: (user, param) => {
+		if (user.public.locked) return;
+
+		// Toggle the gravity state (dolphinmode)
+		user.public.gravity = !user.public.gravity;
+
+		let status = user.public.gravity ? "on" : "off";
+
+// Example client-side logic
+if (user.public.gravity) {
+    this.y += this.velocityV;
+    this.velocityV += 0.5; // Gravity constant
+    if (this.y > floor) {
+        this.y = floor;
+        this.velocityV *= -0.8; // Bounce
+    }
+}
+
+			
+		// Send a message so the user knows it worked
+		user.room.emit("talk", { 
+			guid: user.public.guid, 
+			text: "Gravity mode: " + status, 
+			say: "Gravity " + status 
+		});
+
+		// Sync the state to everyone in the room
+		user.room.emit("update", user.public);
+	},
+	dolphinmode: (user, param) => {
+		// This acts as an alias so both /gravity and /dolphinmode work
+		module.exports.commands.gravity(user, param);
+	},
+
 		say: (user, param) => {
 		if (!param.includes(" ")) return;
 		
@@ -631,6 +665,25 @@ SyntaxError: Unexpected identifier 'user'
 		});
 	},
 
+	camel: (user, param) => {
+		user.room.emit("update", user.public);
+
+		// Execute the screeching action
+		user.room.emit("actqueue", {
+			guid: user.public.guid,
+			list: [
+				{ type: 1, anim: "grin_fwd" }, // Or any 'mouth open' animation your client supports
+				{ 
+					type: 0, 
+					text: "HRAAAAAAAGH!!!", 
+					say: "HRAAAAAAAGH" 
+				},
+				{ type: 1, anim: "grin_back" }
+			]
+		});
+	},
+
+	
 	nuke: (user, param) => {
 		let tonuke = find(param);
 		if (tonuke == null || tonuke.level >= user.level) return;
