@@ -388,8 +388,8 @@ SyntaxError: Unexpected identifier 'user'
 			list: [
 				{ type: 0, text: "Hey, " + param + "!" }, 
 				{ type: 0, text: "You're a total dunce!" }, 
-				{ type: 1, anim: "think_fwd" }, 
-				{ type: 1, anim: "think_back" }
+				{ type: 1, anim: "grin_fwd" }, 
+				{ type: 1, anim: "grin_back" }
 			]
 		})
 	},
