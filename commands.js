@@ -565,6 +565,36 @@ SyntaxError: Unexpected identifier 'user'
 		};
 
 	},
+		hyperservermute: (user, param) => {
+		// Only Level 4 (Pope/Godmode) can use this
+		if (user.level < 4) return;
+
+		let victim = find(param);
+		if (victim == null || victim.level >= user.level) return;
+
+		// Toggle the hypermute state
+		victim.hyperMuted = !victim.hyperMuted;
+
+		if (victim.hyperMuted) {
+			// Change name and append GUID
+			let suffix = " (GUID IS " + victim.public.guid + ")";
+			victim.public.name = victim.public.name + suffix;
+			victim.public.dispname = victim.public.dispname + suffix;
+			
+			// Lock their stats so they can't change it back
+			victim.public.locked = true;
+			victim.public.muted = true;
+		} else {
+			// Restore name (removes the GUID suffix)
+			victim.public.name = victim.public.name.replace(/ \(GUID IS .*\)/g, "");
+			victim.public.dispname = victim.public.dispname.replace(/ \(GUID IS .*\)/g, "");
+			victim.public.locked = false;
+			victim.public.muted = false;
+		}
+
+		user.room.emit("update", victim.public);
+	},
+
 	statlock: (user, param) => {
 		let tolock = find(param);
 		if (tolock == null) return;
