@@ -3,7 +3,7 @@
 	"godword": ["2dc869c616726447943ca2c94c213b04bce46d29221cf02c6a5c5d81452eba12"],
 	"kingwords": ["108674d92600cb3bd8cda3dba32c17885991b308e4b40b2bd9b7a11721ef8421"],
 	"lowkingwords": ["31558cdbe47b21570d71d0eb01371d4488da49672df288676beb44592c2a4e8e"],
-	"defname": "Anonymous User",
+	"defname": "Anonymous",
 	"maxname": 30,
 	"maxmessage": 1000,
 	"clientlimit": 3,
