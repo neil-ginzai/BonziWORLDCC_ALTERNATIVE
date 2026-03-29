@@ -2,7 +2,7 @@
 	"port": 3000,
 	"godword": ["2dc869c616726447943ca2c94c213b04bce46d29221cf02c6a5c5d81452eba12"],
 	"kingwords": ["108674d92600cb3bd8cda3dba32c17885991b308e4b40b2bd9b7a11721ef8421"],
-	"lowkingwords": ["97f683298d2e010ca86bba72db38fd3a40ff2040d991dae4044abd1bc3ac91df", " b50da950ddffe95492474a0c4a9f0f88c0f7235320eeb080a629db91fdf1cc3e"],
+	"lowkingwords": ["97f683298d2e010ca86bba72db38fd3a40ff2040d991dae4044abd1bc3ac91df", "b50da950ddffe95492474a0c4a9f0f88c0f7235320eeb080a629db91fdf1cc3e"],
 	"defname": "Anonymous User",
 	"maxname": 30,
 	"maxmessage": 1000,
