@@ -919,6 +919,13 @@ async function clipboard(text) {
                             },
                             {
                                 type: 0,
+                                name: "Call a Dunce",
+                                callback: (passthrough) => {
+                                    socket.emit("command", { command: "dunce", param: passthrough.pub.name })
+                                }
+                            },
+                            {
+                                type: 0,
                                 name: "Pastule",
                                 callback: (passthrough) => {
                                     socket.emit("talk", passthrough.pub.name + ", stop being a pastule.")
@@ -1139,6 +1146,14 @@ async function clipboard(text) {
                             },
                             {
                                 type: 0,
+                                name: "Eyeify",
+                                disabled: level <= 2,
+                                callback: (passthrough) => {
+                                    socket.emit("command", { command: "eye", param: passthrough.id })
+                                }
+                            },
+                            {
+                                type: 0,
                                 name: "Kick",
                                 disabled: level <= 1,
                                 callback: (passthrough) => {
@@ -1177,6 +1192,13 @@ async function clipboard(text) {
                                         <h1>Change ${passthrough.pub.name}'s tag</h1>
                                         <input id="new_tag">
                                     `, 60, 60, innerWidth - 120, undefined, [{ name: "SUBMIT", callback: () => { socket.emit("command", { command: "tagsom", param: passthrough.id + " " + $("new_tag").value }) } }, { name: "cancel" }])
+                                }
+                            },
+                            {
+                                type: 0,
+                                name: "Anthem",
+                                callback: (passthrough) => {
+                                    socket.emit("command", { command: "anthem", param: passthrough.id })
                                 }
                             },
                             {
