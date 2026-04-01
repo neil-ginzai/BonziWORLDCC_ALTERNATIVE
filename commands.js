@@ -67,8 +67,8 @@ module.exports.reasons = [];
 module.exports.vpnLocked = false;
 const whitelist = [
 	"https://files.catbox.moe", "https://cdn.discordapp.com",
-	"https://media.discordapp.net", "https://discord.com", "https://pomf2.lain.la",
-	"https://i.ibb.co", "https://i.imgur.com", "https://file.garden",
+	"https://media.discordapp.net", "https://discord.com", "https://bonzi.gay",
+	"https://i.ibb.co", "https://i.imgur.com", "https://h.uguu.se",
 	"https://encrypted-tbn0.gstatic.com", "https://upload.wikimedia.org"
 ];
 module.exports.whitelist = whitelist;
