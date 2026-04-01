@@ -19,7 +19,7 @@
 			{"type": 0, "text": "I'm not here to entertain you."}
 		],
 		[
-			{"type": 0, "text": "Prepare for something Fune has never heard of, {NAME}"},
+			{"type": 0, "text": "Prepare for something Fune and Seamus have never heard of, {NAME}"},
 			{"type": 1, "anim": "praise_fwd"},
 			{"type": 0, "text": "HUMOUR!"},
 			{"type": 1, "anim": "praise_back"}
@@ -45,13 +45,19 @@
 			{"type": 1, "anim": "shrug_back"}
 		],
 		[
+			{"type": 0, "text": "Time to crack my bones."},
+			{"type": 1, "anim": "shrug_back"},
+			{"type": 1, "anim": "backflip"}, 
+			{"type": 0, "text": "i feel okay"}
+	    ],
+		[
 			{"type": 0, "text": "What type of water won't freeze?"},
 			{"type": 0, "text": "Your mother's."},
 			{"type": 1, "anim": "shrug_back"}
 		],
 		[
 			{"type": 0, "text": "What is in the middle of Paris?"},
-			{"type": 0, "text": "A giant inflatable buttplug."},
+			{"type": 0, "text": "I don't know, but it's probably a tower."},
 			{"type": 1, "anim": "shrug_back"}
 		],
 		[
