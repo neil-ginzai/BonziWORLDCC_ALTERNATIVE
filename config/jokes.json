@@ -8,15 +8,15 @@
 		[
 			{"type": 0, "text": "Wanna hear a joke?"},
 			{"type": 0, "text": "No?"},
-			{"type": 0, "text": "Then go fuck yourself."}
+			{"type": 0, "text": "Mute me then, thats your fucking problem."}
 		],
 		[{"type": 0, "text": "{NAME} used /joke. Whoop-dee-fucking doo."}],
 		[{"type": 0, "text": "HEY YOU IDIOTS ITS TIME FOR A JOKE"}],
 		[{"type": 0, "text": "Senpai {NAME} wants me to tell a joke."}],
 
 		[
-			{"type": 0, "text": "Kill yourself, {NAME}"},
-			{"type": 0, "text": "I'm not here to entertain you."}
+			{"type": 0, "text": "Keep going, {NAME}"},
+			{"type": 0, "text": "I'm here to entertain you."}
 		],
 		[
 			{"type": 0, "text": "Prepare for something Fune and Seamus have never heard of, {NAME}"},
@@ -40,8 +40,18 @@
 			{"type": 1, "anim": "shrug_back"}
 		],
 		[
+			{"type": 0, "text": "you need camel"},
+			{"type": 0, "text": "you need it"},
+			{"type": 1, "anim": "shrug_back"}
+		],
+		[
 			{"type": 0, "text": "What goes in pink and comes out blue?"},
 			{"type": 0, "text": "Sonic's asshole."},
+			{"type": 1, "anim": "shrug_back"}
+		],
+		[
+			{"type": 0, "text": "I flood BonziWORLD and i love CollabVM and have a fetish for konqi, who am i?"},
+			{"type": 0, "text": "Bjornerd."},
 			{"type": 1, "anim": "shrug_back"}
 		],
 		[
@@ -56,15 +66,27 @@
 			{"type": 1, "anim": "shrug_back"}
 		],
 		[
+			{"type": 0, "text": "Why cant GoKids graduate?"},
+			{"type": 0, "text": "Because they have to repeat kindergarten!"},
+			{"type": 1, "anim": "shrug_back"}
+		],
+		[
 			{"type": 0, "text": "What is in the middle of Paris?"},
 			{"type": 0, "text": "I don't know, but it's probably a tower."},
 			{"type": 1, "anim": "shrug_back"}
 		],
 		[
 			{"type": 0, "text": "Why did the chicken cross the road?"},
+			{"type": 0, "text": "To get to the other side!"}, 
+			{"type": 1, "anim": "shrug_back"}, 
+			{"type": 1, "anim": "grin_fwd"}, 
+			{"type": 0, "text": "Classic, isn't it?"}
+		],
+		[
+			{"type": 0, "text": "Why did the chicken cross the road?"},
 			{"type": 1, "anim": "shrug_back"},
 			{"type": 0, "text": "Ok, let's get serious. I'll let you in on a little secret the feds don't want you knowing."},
-			{"type": 0, "text": "Phones have a secret \"Instant Charging\" feature, you can enable it by microwaving your phone."}
+			{"type": 0, "text": "Phones have a secret \"Instant Charging\" feature, you can enable it by microwaving your phone, or just actually use a charger, dont microwave your phone or else your house will burn."}
 		],
 		[
 			{"type": 0, "text": "What do you call a man who shaves 10 times a day?"},
