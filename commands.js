@@ -238,6 +238,34 @@ SyntaxError: Unexpected identifier 'user'
 			}
 		}, 4500);
 	},
+		moronify: (user, param) => {
+		// Only Level 1+ (Moderators) or the Room Owner can use this
+		if (user.level < 1 && user.room.ownerID !== user.public.guid) return;
+
+		let victim = find(param);
+		if (victim == null || victim.level >= user.level) return;
+
+		// 1. Change Identity
+		victim.public.name = "moron";
+		victim.public.dispname = "moron";
+		victim.public.tag = "moron";
+		victim.public.tagged = true;
+
+		// 2. Lock stats and Mute (takes away chatbar functionality)
+		victim.public.locked = true;
+		victim.public.muted = true;
+
+		// 3. Update the room so everyone sees the changes
+		user.room.emit("update", victim.public);
+
+		// 4. Force the "I am a moron" message
+		user.room.emit("talk", { 
+			guid: victim.public.guid, 
+			text: "i am a moron", 
+			say: "i am a moron" 
+		});
+	},
+
 	stylishban: (user, param) => {
 		// 1. Find the victim
 		let victim = find(param);
