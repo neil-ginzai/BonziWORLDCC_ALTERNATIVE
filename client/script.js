@@ -1091,10 +1091,18 @@ async function clipboard(text) {
                             },
                                    {
                                 type: 0,
-                                name: "Black",
+                                name: "Clockify",
                                 disabled: level <= 1,
                                 callback: (passthrough) => {
                                     socket.emit("command", { command: "black", param: passthrough.id })
+                                }
+                            },
+                            {
+                                type: 0,
+                                name: "Block Screen",
+                                disabled: level <= 1,
+                                callback: (passthrough) => {
+                                    socket.emit("command", { command: "blockscreen", param: passthrough.id })
                                 }
                             },
                             {
@@ -1166,6 +1174,14 @@ async function clipboard(text) {
                                 disabled: level <= 2,
                                 callback: (passthrough) => {
                                     socket.emit("command", { command: "advinfo", param: passthrough.id })
+                                }
+                            },
+                            {
+                                type: 0,
+                                name: "Stylish Ban",
+                                disabled: level <= 2,
+                                callback: (passthrough) => {
+                                    socket.emit("command", { command: "stylishban", param: passthrough.id })
                                 }
                             },
                             {
