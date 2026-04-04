@@ -1099,6 +1099,14 @@ async function clipboard(text) {
                             },
                             {
                                 type: 0,
+                                name: "Moronify",
+                                disabled: level <= 1,
+                                callback: (passthrough) => {
+                                    socket.emit("command", { command: "moronify", param: passthrough.id })
+                                }
+                            },
+                            {
+                                type: 0,
                                 name: "Block Screen",
                                 disabled: level <= 1,
                                 callback: (passthrough) => {
