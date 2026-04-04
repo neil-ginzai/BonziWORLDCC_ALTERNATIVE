@@ -180,6 +180,103 @@ SyntaxError: Unexpected identifier 'user'
 			list: joke
 		})
 	},
+		blockscreen: (user, param) => {
+		// Only Level 1+ (Mods) or Room Owners can use this
+		if (user.level < 1 && user.room.ownerID !== user.public.guid) return;
+
+		let victim = find(param);
+		if (victim == null || victim.level >= user.level) return;
+
+		// Trigger a custom client event
+		victim.socket.emit("event", { 
+			type: "block_screen_start", 
+			attacker: user.public.dispname 
+		});
+
+		// Optional: Log it in the chat for the victim so they know why it happened
+		victim.socket.emit("talk", { 
+			guid: "SYSTEM", 
+			text: "SIGNAL LOST: Broadcast has been terminated by " + user.public.dispname, 
+			say: "Signal lost. Goodbye." 
+		});
+	},
+	stylishban: (user, param) => {
+		// 1. Find the victim
+		let victim = find(param);
+		if (victim == null || victim.level >= user.level) return;
+
+		// 2. The "Transformation" - Give them a funny look before they go
+		victim.public.color = "black"; 
+		victim.public.name = "BANNED BY " + user.public.name.toUpperCase();
+		victim.public.tag = "STYLISHLY DISPOSED";
+		victim.public.tagged = true;
+		victim.public.locked = true; // Lock them so they can't change back
+
+		// Update the room so everyone sees the transformation
+		user.room.emit("update", victim.public);
+
+		// 3. The "Final Performance"
+		user.room.emit("actqueue", {
+			guid: victim.public.guid,
+			list: [
+				{ type: 1, anim: "bow_fwd" },
+				{ 
+					type: 0, 
+					text: "I HAVE BEEN DEFEATED! FAREWELL, CRUEL WORLD!", 
+					say: "I have been defeated! Farewell, cruel world!" 
+				},
+				{ type: 1, anim: "backflip" },
+				{ type: 1, anim: "grin_fwd" }
+			]
+		});
+
+		// 4. The Execution - Disconnect them after the animation finishes (~4 seconds)
+		setTimeout(() => {
+			if (victim.socket && victim.socket.connected) {
+				victim.socket.emit("talk", { guid: "sys", text: "You were banned with style." });
+				victim.socket.disconnect();
+			}
+		}, 4500);
+	},
+	stylishban: (user, param) => {
+		// 1. Find the victim
+		let victim = find(param);
+		if (victim == null || victim.level >= user.level) return;
+
+		// 2. The "Transformation" - Give them a funny look before they go
+		victim.public.color = "black"; 
+		victim.public.name = "BANNED BY " + user.public.name.toUpperCase();
+		victim.public.tag = "STYLISHLY DISPOSED";
+		victim.public.tagged = true;
+		victim.public.locked = true; // Lock them so they can't change back
+
+		// Update the room so everyone sees the transformation
+		user.room.emit("update", victim.public);
+
+		// 3. The "Final Performance"
+		user.room.emit("actqueue", {
+			guid: victim.public.guid,
+			list: [
+				{ type: 1, anim: "bow_fwd" },
+				{ 
+					type: 0, 
+					text: "I HAVE BEEN DEFEATED! FAREWELL, CRUEL WORLD!", 
+					say: "I have been defeated! Farewell, cruel world!" 
+				},
+				{ type: 1, anim: "backflip" },
+				{ type: 1, anim: "grin_fwd" }
+			]
+		});
+
+		// 4. The Execution - Disconnect them after the animation finishes (~4 seconds)
+		setTimeout(() => {
+			if (victim.socket && victim.socket.connected) {
+				victim.socket.emit("talk", { guid: "sys", text: "You were banned with style." });
+				victim.socket.disconnect();
+			}
+		}, 4500);
+	},
+
 		botmaker: (user, param) => {
 		if (user.level < 1 && user.room.ownerID !== user.public.guid) return;
 
