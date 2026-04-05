@@ -20,7 +20,7 @@ setInterval(()=>{
     })
 }, 60000)
 
-let blacklist = ["repl.co", ".onion", ".xn--onion", "msagent.chat"];
+let blacklist = ["repl.co", ".onion", ".xn--onion"];
 function checkBlacklist(param){
     bad = false;
     blacklist.forEach((badword)=>{
@@ -411,20 +411,20 @@ class user{
 
 			if(text.rtext == "#standwithisrael" && this.public.locked == false){
 				this.public.tagged = true;
-				this.public.tag = "Israel Faggot";
+				this.public.tag = "Israel Suporter";
 				this.room.emit("update", this.public);
 			} else if(text.rtext.includes("windows93.net/trollbox") && this.public.locked == false){
 				this.public.tagged = true;
 				this.public.color = "windows93"
-				this.public.tag = "Windows93FAG";
-				this.public.name = "Windows93 RAIDER FAGGOT"
+				this.public.tag = "Windows93TARD";
+				this.public.name = "Windows93 RAIDER MAGGOT"
 				this.room.emit("update", this.public);
 				return;
 			}
 			else if(text.rtext == "#freepalestine" && this.public.locked == false){
 				this.public.tagged = true;
 				this.public.hat = "palestine" 
-				this.public.tag = "Respect Muslim"; //YEAH IM A FUGGIN' ARAB
+				this.public.tag = "Respect Muslims"; //YEAH IM A FUGGIN' ARAB
 				this.room.emit("update", this.public);
 			}
 			//Webhook say
@@ -444,7 +444,7 @@ class user{
             this.room.msgsSent++;
 							} catch(exc){
 									this.room.emit("announce", {title: "ERROR", html: `
-									<h1>MUST REPORT TO FUNE!</h1>
+									<h1>MUST REPORT TO NEIL!</h1>
 									Send fune a screenshot of this: ${sanitize(exc)}`});
 							}
 		})
