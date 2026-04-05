@@ -45,13 +45,19 @@
 			{"type": 1, "anim": "shrug_back"}
 		],
 		[
-			{"type": 0, "text": "What goes in pink and comes out blue?"},
-			{"type": 0, "text": "Sonic's asshole."},
+			{"type": 0, "text": "you"},
+			{"type": 0, "text": "are"},
+			{"type": 0, "text": "camel"},
 			{"type": 1, "anim": "shrug_back"}
 		],
 		[
-			{"type": 0, "text": "I flood BonziWORLD and i love CollabVM and have a fetish for konqi, who am i?"},
+			{"type": 0, "text": "I flood BonziWORLD and i love CollabVM and have a fetish for Konqi, who am i?"},
 			{"type": 0, "text": "Bjornerd."},
+			{"type": 1, "anim": "shrug_back"}
+		],
+		[
+			{"type": 0, "text": "Here's a joke."},
+			{"type": 0, "text": "Nazar."},
 			{"type": 1, "anim": "shrug_back"}
 		],
 		[
@@ -91,6 +97,11 @@
 		[
 			{"type": 0, "text": "What do you call a man who shaves 10 times a day?"},
 			{"type": 0, "text": "A woman."},
+			{"type": 1, "anim": "shrug_back"}
+		],
+		[
+			{"type": 0, "text": "What do you call a man who shaves hairs?"},
+			{"type": 0, "text": "A barber."},
 			{"type": 1, "anim": "shrug_back"}
 		],
 				[
